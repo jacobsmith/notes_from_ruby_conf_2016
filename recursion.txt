@@ -1,0 +1,17 @@
+Why recursion matters
+James Coglan
+
+Creatd Fey (part of action cable now - web sockets)
+
+Procedures vs. Structures
+
+Correctness
+  Proof by Mathematical induction
+  sum(1 .. n + 1) = sum(1..n) + (n + 1)
+
+Proof by Structural induction
+
+Laziness
+  - using specialized tools
+
+*insert magical logical programming here*
