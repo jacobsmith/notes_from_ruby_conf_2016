@@ -1,0 +1,15 @@
+DTrace
+"Dynamic tracing and observability system"
+
+- dtrace is a fancier version of strace
+  julia (somebody) zine on strace [ https://jvns.ca/blog/2015/04/14/strace-zine/ ]
+- system resources
+- statically-defined tracing
+- dynamic tracing
+
+Slow Tests (...sometimes)
+Start early with broad investigations
+`time sudo dtrace -qn 'profile-997 { @[execname] = count() }'`
+
+`find /usr/bin -name "*.d"`
+
