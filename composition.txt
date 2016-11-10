@@ -1,0 +1,69 @@
+@jamesdabbs
+
+Composition
+  - combining pieces cohesively
+
+Category Theory
+
+"composition refers to an object holding a reference to one or more other objects"
+  - "has-a" relationship instead of "is-a" relationship
+
+"Klein bottle for sale, enquire within"
+
+Collaborating objects allw us to parameterize behavior
+We do not need a separate class for each permutation
+
+Objects should have a defined collection of fields
+Fields should be set at initialization and then frozen
+"Updates" are performed by careateing a new object
+Ojbects should respond to `call` to perform their (primary) responsibility
+
+Objects: 
+  -have a clearly defined responsibility
+  - have a predicatable interface
+  - immutable
+  - injectable dependencies
+  - easy to configure and re-configure
+  - easy to test
+  - easy to mock in tests
+
+You already think this way
+def create_psost request
+  post = parse_input request
+  id = persist post
+  success_with_id id
+end
+
+roughyly quivalent to 
+  success_with_id(
+    persist(
+      parse_input request
+    )
+  ) 
+
+When composition is implicit, so are boundaries (be explicit)
+
+
+def call(sms)
+  compose(
+    :parse_message,
+    :build_order,
+    :validate_order,
+    :record,
+    :send_response
+  ).call sms
+
+def compose *methods
+  ->(val) do
+    methods.reduce(val) do |result, name|
+      if result.error # propogate errors forward
+        result
+      else
+        method(name).call result
+      end
+    end
+  end
+end
+
+pzol/detrministic
+dry-rb/dry-container
