@@ -1,0 +1,31 @@
+Guild
+(new concurrency model) ?
+
+Membership model
+  - every object bleongs to a guild
+  - normal objects only ever belong to one guild
+  - you can only transfer objects between guilds
+  - each guild runs in an independent thread *without GIL*
+  - Koichi will have a session about it tomorrow (Friday talk)
+
+Some interface type things
+No explicit annotations
+"Structural typing + inference"
+
+def Log(dst, mesg)
+  dst.write(mesg)
+end
+  > mesg is an argument of write()
+  > all write() methods take a string as an argument
+  > mesg should behave like a string
+
+Collect type data at run-time, especially from tests
+
+"The future is less code and more communication"
+
+Summary:
+  Be nice
+  we can be stronger by being nicer
+  moving forward to survive
+
+Better Ruby is not enough - we have to have better gems, better frameworks, etc.
