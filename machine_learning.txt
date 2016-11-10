@@ -1,0 +1,19 @@
+Machine Learning
+
+Features && Labels
+  Features = raw pixels (vectors of intensities)
+  Labels = digit (0..9)
+
+Neural Network
+  input => neuron => weight => summation => threshold => output
+
+Back propogation
+  go back and tweak weights
+
+MNIST Dataset
+RubyFann gem
+sciruby.com
+
+ruby-mnist.herokuapp.com
+
+github.com/ericqweinstein/ruby-mnist
