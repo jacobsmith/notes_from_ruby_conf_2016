@@ -1,0 +1,93 @@
+Nate Berkopec
+
+1. Dial back the instance counts (Puma workers)
+    - Discover true steady-state moemory usage per instance
+
+  Myth: memory usage should look like a long, flat line
+  Reality: Look kind of like logarithms
+    - Filling up caches
+    - Connections to database
+    - Takes a while for all code paths to get hit, instantiate all these thigns, etc.
+
+  Let a ruby process grow over 18-24 hours before looking at Memory consumption steady-state
+
+  Aim for 300mb per instance
+    - this also applies to sidekiq
+
+2. Stop allocating so many objects at once
+
+Myth: Shouldnt GC clean up the unused objects?
+Reality: No, GC is lazy, thresholds trigger GC 
+
+ Thresholds
+  - slots for objects runs out
+  - 2 malloc thresholds
+
+Heap Fragmentation (Object space)
+  Object space - pages (columns) slots
+  Each page has 408 slots for objects
+  pages are 16kb
+  each slot is 40 bytes
+    each slot has R_VAlue (object, class, what it is or pointer to object)
+
+  Ruby cannot move objects between pages
+  Ruby can only release a page when there are no objects in the page
+
+Heap
+  - Actual Heap, things larger than 40 bytes live here and R_VALUE holds pointer to here
+
+`GC::INTERNAL_CONSTANTS` 
+
+malloc and free are suggestions, not commands
+  allocator may not give it back
+  OS may not "reclaim" that memory
+
+Heap fragmentation can cause long-term slow 'leaks' (i.e., a constant, tons of empty space, another constant -- allocator won't necessarily take that space back)
+
+Allocate fewer objects
+  (Don't use N + 1 object creation, etc.)
+
+Use an APM - scout, skylight, new relic
+memory_profiler or oink (free gems)
+
+`GC.stat` - hash with heap information (in every Ruby Thread)
+`Objectspace.count_objects`
+
+If all else fails, move to rake tasks
+  - throwaway vms are better than bloated vms
+
+3. Gemfile audit with derailed
+  Requre false for assets!
+  `gem 'sass', require: false`
+
+4. Jmalloc
+  - can choose a different GC
+  - emphaszes fragmentation avoidance and scalable concurrency support
+
+5. Use copy-on-write
+  puma/unicorn/passegner with preloading
+
+  - Shares memory between processes
+
+6. Use a threaded webserver
+  Increase concurrency with lighter methods
+
+  Mini-myth: My application isn't thread-safe
+  Fact: It might be?
+    Minitest/hell
+
+  minitest will run each new test in a new thread
+
+7. keep ruby and gems up to date
+  Ruby 2.2+
+  Rails 4.2+
+
+8. Tune Malloc
+  MALLOC_ARENA_MAX to something like 2 or 3 (decrease memory usage, increase thread contention, so some performance decrease)
+
+9. Tune your GC
+  Don't do this until you can read gc.c - don't do this...
+
+ Railsspeed.com 
+
+@nateberkopec

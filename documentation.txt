@@ -1,0 +1,19 @@
+Commit message
+
+What
+  How (less necessary, more fluff)
+    Why
+
+*Why* style of commits instead of *what
+    Demonstrate a goat message (what)
+  vs.
+    Enable a user to write a new goat message (why)
+
+Picture the context and the likely user(s) (even if that's just future you)
+
+Practice:
+  - Write install instructions, have a fellow developer try and followthem
+  - update a readme
+
+Conversational documentation is *awesome*
+

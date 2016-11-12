@@ -1,0 +1,15 @@
+Jonan
+@thejonanshow
+
+Vocal cords: kind of like a throat butt
+All speech is basically throat farting
+
+utterance - word, couple of words, sequence of spoken language a computer can understand
+phonemes - the sounds that we use
+monophones - the 'a' in "bad" vs "ban"
+most use triphones
+
+5-10 ms of speech => fourier transformation (sound to amplitude and frequency) (split into its constiutuent sin waves)
+
+Web Speech API
+Ruby-Pocketsphinx

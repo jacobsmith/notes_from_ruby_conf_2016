@@ -1,0 +1,27 @@
+RubyTogether - non-profit for supporting bundler
+@indirect
+André
+
+"real programmers" do not exist
+
+GitHub is not your resume
+
+Al of the benefits of an un-paid internship, but you don't have to get anyone's permission! =P
+
+Only work for free if you can and you want to
+
+choose a licence carefully
+
+
+1. What is going on?
+  Read everything
+    Read all issues
+    Follow the project on github so you get notifications
+2. Answer questions
+3. help with issues
+4. reproduce bugs
+5. writing patches
+6. improve everything
+7. you're doing it!
+8. now you're in charge :trollface:
+
