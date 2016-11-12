@@ -5,6 +5,7 @@ Why use openstruct?
   - Configuration object
   - Simple test double
 
+```ruby
 class APICall < OpenStruct
   def self.execute
     response = Net::HTTP.get(uri...)
@@ -12,9 +13,11 @@ class APICall < OpenStruct
   end
 end
 results = APICall.execute
+```
 
 Thinking of data as an object
 
+```ruby
 class User < OpenStruct
   def name
     "#first_name} #{last_name}"
@@ -23,9 +26,11 @@ end
 
 api_call = JSON.parse(API.get('/users/1'))
 User.new(api_call).name
+```
 
 Configuration Object
 
+```ruby
 MyGem.configure do |configuration|
   configuration.setting = true
 end
@@ -39,20 +44,25 @@ class MyGem
     @configuration ||= OpenStruct.new
   end
 end
+```
 
 ## Test double
 
+```ruby
 payment_gateway = OpenStruct.new(charge: :PAID)
 assert something was added to payment_gateway, etc.
+```
 
-OpneStruct defines attribute gett/ersetter methods on the object's singleton class
+OpneStruct defines attribute getter/setter methods on the object's singleton class
 i.e.
 
+```ruby
 foo = Object.new
 def foo.bar
   "hello from bar"
 end
 foo.bar # "hello from bar"
+```
 
 Hierarchical method cache
 jamesgolic.com/2013/4/14/mris-method-cache
@@ -63,6 +73,8 @@ Works for Vitals
 
 
 How he profiled
+
+```ruby
 gem 'stackprof'
 
 StackProf.run(mode: :cup, out: 'tmp/stackprof.dump') do
@@ -70,7 +82,7 @@ StackProf.run(mode: :cup, out: 'tmp/stackprof.dump') do
 end
 
 stackprof tmp/stackprof.dump --text
-
+```
 
 ##
 
@@ -79,6 +91,7 @@ Overwrites method messing, bypasses defining methods (slow)
 
 PersistentOpenStruct
 
+```ruby
 class Animal < PersistentOpenStruct
   def speak
     "The #{type} makes a #{sound} sound!"
@@ -88,9 +101,13 @@ end
 dog = Animal.new(type: 'dog', sound: :woof)
 
 Animal.methods => [type, type=, etc.]
+```
+
 Defines methods on the *Class*, so further things that inherit don't have to redefine those methods (expensive!)
 
 Benchmarking
+
+```ruby
 require 'benchmark/ips'
 Benchmark.ips do |x|
   x.report('old code') do
@@ -103,11 +120,14 @@ Benchmark.ips do |x|
 
   x.report
 end
+```
 
 OpenStruct
   - Define OpenStruct attributes lazily (dramatic improvement when some keys are never accessed)
 
 DynamicClass
+
+```ruby
 Animal = DynamicClass.new do
   def speak
     "The #{type} makes a #{sound} sound!"
@@ -120,3 +140,4 @@ def add_methods@!(ey)
     ...
    end
 end
+```
