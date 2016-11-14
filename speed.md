@@ -5,7 +5,7 @@
 StackProf.run(mode: :wall, out: "tmp/stackprof.dump") do
   Rake::Task["assets:precompile"].invoke
 end
-``
+```
 
 Inspect stackprof output
 
